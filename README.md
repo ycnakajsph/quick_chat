@@ -10,3 +10,5 @@ Step 2 :
 I've added a test for the new function verify_room_name
 Step 3 :
 I've removed the first test and added a fancier
+Step 5 : 
+I've coded the function verify_room_name

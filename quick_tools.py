@@ -14,7 +14,10 @@ def get_rooms(db_path):
 
 
 def verify_room_name(room_name):
-	pass
+	if room_name.startswith('ROOM_'):
+		if len(room_name) >= 8 :
+			return True
+	return False
 
 
 def add_room(db_path, room_name, room_type):
