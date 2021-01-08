@@ -19,6 +19,19 @@ def verify_room_name(room_name):
 			return True
 	return False
 
+#user password is > 8 chars, includes numbers and at least a special character
+def verify_user_password(password):
+	special_characters = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+	if len(password) > 8:
+		if any(char.isdigit() for char in password):
+			if any(char in special_characters for char in password):
+				return True 
+	return False
+
+def verify_room_type(room_type):
+	if room_type == "public" or room_type == "private":
+		return True 
+	return False
 
 def add_room(db_path, room_name, room_type):
 	connect = sqlite3.connect(db_path)
