@@ -18,3 +18,6 @@ I've coded the function verify_room_name
 
 Step 6:
 test commit
+
+Step 7:
+New Branch
