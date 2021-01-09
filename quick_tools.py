@@ -12,14 +12,23 @@ def get_rooms(db_path):
 
 	return rooms
 
+def verify_room_name(room_name):
+	# Extra requirement: room_name start with ROOM_ and length >=8
+	
+
+def verify_room_type(room_type):
+	# Extra requirement: room_type has to be public or private
+	
 
 def add_room(db_path, room_name, room_type):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
 
-	sql = 'INSERT INTO Rooms (room_name,room_type) VALUES (?,?)'
 
+	sql = 'INSERT INTO Rooms (room_name,room_type) VALUES (?,?)'
 	cursor.execute(sql,(room_name, room_type))
+
+	
 	connect.commit()
 
 
@@ -45,14 +54,21 @@ def get_users(db_path):
 
 	return users
 
+def verify_user_password(user_password):
+	# Extra requirement: check the password have number,special character, length>8 
+	
 
+	
 def add_user(db_path, user_name, user_role, user_rights, user_password):
+
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
-
+	
+	
 	sql = 'INSERT INTO Users (user_name, user_role, user_rights, user_password) VALUES (?,?,?,?)'
-
 	cursor.execute(sql,(user_name, user_role, user_rights, user_password))
+
+
 	connect.commit()
 
 
