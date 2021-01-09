@@ -1,5 +1,5 @@
 import unittest
-from quick_tools import verify_room_name
+from quick_tools import *
 import random
 import string
 
@@ -17,3 +17,17 @@ class QuickToolsTester(unittest.TestCase):
 
 		self.assertTrue(verify_room_name(correct_room))
 
+	def test_verify_room_type(self):
+
+		self.assertFalse(verify_room_type('undefined')) # Isn't "private" or "public"
+		self.assertTrue(verify_room_type('public'))
+		self.assertTrue(verify_room_type('private'))
+
+
+	def test_verify_user_password(self):
+
+		self.assertFalse(verify_user_password('PASS94?')) 		# Isn't long enough
+		self.assertFalse(verify_user_password('PASSword?'))		#Number missing
+		self.assertFalse(verify_user_password('PASSword94'))	#Special character missing
+		self.assertFalse(verify_user_password('Pass'))		#Isn't long enough, number AND special character missing
+		self.assertTrue(verify_user_password('PASSwoRD94?'))
