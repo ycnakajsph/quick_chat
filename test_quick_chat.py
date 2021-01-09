@@ -8,5 +8,5 @@ class QuickToolsTester(unittest.TestCase):
 
 		self.assertFalse(verify_room_type('')) # Not private or public
 		self.assertFalse(verify_room_type('azerty')) # Not private or public
-		self.assertTrue(verify_room_name('private')) # is private
-		self.assertTrue(verify_room_name('public')) # is public
+		self.assertTrue(verify_room_type('private')) # is private
+		self.assertTrue(verify_room_type('public')) # is public
