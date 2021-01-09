@@ -26,8 +26,8 @@ class QuickToolsTester(unittest.TestCase):
 
 	def test_verify_user_password(self):
 
-		self.assertFalse(verify_user_password('PASS94?')) 		# Isn't long enough
-		self.assertFalse(verify_user_password('PASSword?'))		#Number missing
+		self.assertFalse(verify_user_password('PASS94?')) 	# Isn't long enough
+		self.assertFalse(verify_user_password('PASSword?'))	#Number missing
 		self.assertFalse(verify_user_password('PASSword94'))	#Special character missing
 		self.assertFalse(verify_user_password('Pass'))		#Isn't long enough, number AND special character missing
 		self.assertTrue(verify_user_password('PASSwoRD94?'))
