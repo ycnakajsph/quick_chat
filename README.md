@@ -15,3 +15,11 @@ I've removed the first test and added a fancier
 
 Step 5 : 
 I've coded the function verify_room_name
+
+Step 6 :
+
+We've created 2 other fonctions named verify_room_type and verify_user_password (due to organisation problems and the fact that we learned very recently about the work, we wrote the code before the test)
+
+Step 7 :
+
+We've created 2 other tests for those 2 fonctions. We test various types of room_type and password to ensure that every bug should be detected.
