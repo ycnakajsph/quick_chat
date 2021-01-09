@@ -28,51 +28,48 @@ Donc la processus de contôler ce systèmes peut faciliter par les opérations d
 - Sélectionner les valeurs : `get_rooms` et `get_users`
 - Supprimer les valeurs : `delete_room` et `delete_user`
 
-Système d'authentification
+TDD: Test-Driven Development
 --
-- Nous avons besoin de vérifiez que le mot de passe a un numéro, un caractère spécial, une longueur> 8.
 
+Le but est de nous familiariser de la méthode TDD. Donc nous avons d'abord analysé les fonction à réaliser et codé les tests. Après nous avons fait le développment afin de réaliser et passer tout les tests.
+
+Etape 1: Ajouter les tests et les fonctions à tester. Les fonctions sera codé après les tests sont finis.
+
+Prototypes des Fonctions: 
 ```python
 def verify_user_password(user_password):
-	# Extra requirement: check the password have number,special character, length>8 
-	is_number = 0
-	special_character = 0
 
-	for i in user_password:
-		if i.isdigit():
-			is_number = 1
-
-		if (not i.islower()) and (not i.isupper())  and (not i.isdigit()):
-			special_character = 1
-
-	if len(user_password)>=8:
-		if is_number and special_character:
-			return True
-
-	return False
-```
-
-Salles publiques ou privées
---
-- Room\_name doit commencer par ROOM\_ et comporter plus de 8 caractères
-
-```python
 def verify_room_name(room_name):
-	# Extra requirement: room_name start with ROOM_ and length >=8
-	if room_name.startswith('ROOM_'):
-		if len(room_name) >= 8 :
-			return True
-	return False
-```
-- Le type de room doit définir en publiques ou privées
 
-```python
 def verify_room_type(room_type):
-	# Extra requirement: room_type has to be public or private
-	if room_type == 'public' or room_type == 'private':
-		return True
-	return False
+
 ```
+Tests unitaires:
+```python
+def test1_create_db(self):
+
+def test2_verify_user_password(self):
+
+def test3_add_user(self):
+
+def test4_get_users(self):
+
+def test5_delete_user(self):
+
+def test6_verify_room_name(self):
+
+def test7_verify_room_type(self):
+
+def test8_add_room(self):
+
+def test9_get_rooms(self):
+
+def test10_delete_room(self):
+
+```
+Etape 2: Compléter les tests correspondant à différentes fonctions (Détails dans la section suivante Test Unitaire)
+
+Etape 3: Compléter les fonctions pour passer tout les tests (Détails après la section Test Unitaire)
 
 Test Unitaire
 --
@@ -98,7 +95,7 @@ def test1_create_db(self):
 ```
 
 - `test2_verify_user_password`
-Nous savons que le mot de passe doit avoir un numéro, un caractère spécial et une longueur> 8. Donc dans cette test, on vérifie 3 fois pour assuser que seulement les mots de passe qui répondent aux exigences peuvent réussir le test.Nous donnons 3 situations : la longueur du mot de passe inférieur à 8, manque le caractère spécial et la situation correcte.
+Nous savons que le mot de passe doit avoir un numéro, un caractère spécial et une longueur>= 8. Donc dans cette test, on désigne 3 tests avec des mots de passe valides/invalides pour assuser que seulement les mots de passe qui répondent aux exigences peuvent réussir le test. Nous donnons 3 situations : la longueur du mot de passe soit inférieur à 8, manque le caractère spécial et la situation correcte.
 ```python
 def test2_verify_user_password(self):
 
@@ -222,3 +219,50 @@ def test10_delete_room(self):
 			none = row[0]
 		self.assertEqual(none,'')
 ```
+
+Système d'authentification
+--
+- Nous avons besoin de vérifiez que le mot de passe a un numéro, un caractère spécial, une longueur>= 8.
+
+```python
+def verify_user_password(user_password):
+	# Extra requirement: check the password have number,special character, length>8 
+	is_number = 0
+	special_character = 0
+
+	for i in user_password:
+		if i.isdigit():
+			is_number = 1
+
+		if (not i.islower()) and (not i.isupper())  and (not i.isdigit()):
+			special_character = 1
+
+	if len(user_password)>=8:
+		if is_number and special_character:
+			return True
+
+	return False
+```
+
+Salles publiques ou privées
+--
+- Room\_name doit commencer par ROOM\_ et comporter plus de 8 caractères
+
+```python
+def verify_room_name(room_name):
+	# Extra requirement: room_name start with ROOM_ and length >=8
+	if room_name.startswith('ROOM_'):
+		if len(room_name) >= 8 :
+			return True
+	return False
+```
+- Le type de room doit définir en publiques ou privées
+
+```python
+def verify_room_type(room_type):
+	# Extra requirement: room_type has to be public or private
+	if room_type == 'public' or room_type == 'private':
+		return True
+	return False
+```
+
