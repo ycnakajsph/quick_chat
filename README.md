@@ -5,6 +5,10 @@ room_type should be 'private' or 'public'
 To begin let's add the associated tests.
 
 Step 1 :
-I've created the function def verify_room_type(room_type)
+I've created the function def verify_room_type(room_type
+
 Step 2 :
 I've added a test for the new function verify_room_type
+
+Step 3 :
+I've coded the function verify_room_type
