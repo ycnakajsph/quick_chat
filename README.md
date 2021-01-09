@@ -15,3 +15,6 @@ I've removed the first test and added a fancier
 
 Step 5 : 
 I've coded the function verify_room_name
+
+Step 6:
+test commit
