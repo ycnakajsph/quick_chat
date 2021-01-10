@@ -66,14 +66,7 @@ def delete_user(db_path, user_name):
 	connect.commit()
 
 def create_db(db_path):
-	connect = sqlite3.connect(db_path)
-
-	cursor = connect.cursor()
-
-	cursor.execute('CREATE TABLE Rooms ([id_room] INTEGER PRIMARY KEY,[room_name] text UNIQUE, [room_type] text)')
-	cursor.execute('CREATE TABLE Users ([id_user] INTEGER PRIMARY KEY,[user_name] text UNIQUE, [user_role] integer, [user_rights] integer, [user_password] text)')
-
-	connect.commit()
+	pass
 
 # Db creation :
 # db_path = 'quick_chat.db'
