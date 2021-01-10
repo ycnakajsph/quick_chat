@@ -1,6 +1,6 @@
 import unittest
 import sqlite3
-from QuickChat_bdd import createDb
+from quick_tools import createDb
 
 
 class test_creation_delete_bdd(unittest.TestCase):

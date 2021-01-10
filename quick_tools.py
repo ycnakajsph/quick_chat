@@ -65,7 +65,7 @@ def delete_user(db_path, user_name):
 	cursor.execute(sql,(user_name,))
 	connect.commit()
 
-def create_db(db_path):
+def createDb(db_path):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
 	cursor.execute('CREATE TABLE Room ([id] INTEGER PRIMARY KEY,[name] TEXT UNIQUE, [password] TEXT NOT NULL, [private] BOOLEAN, [size] INTEGER)')
