@@ -1,19 +1,38 @@
 import unittest
-from quick_tools import verify_room_name
+from quick_tools import verify_user_psswd
+from quick_tools import verify_room_type
 import random
 import string
 
 class QuickToolsTester(unittest.TestCase):
 
-	def test_verify_room_name(self):
+	def verify_user_psswd(self):
+		"""
+		User_password : > 8 chars, inclut nombres et au moins un caractère special
+		"""
+		self.assertFalse(verify_user_passwd('aout')) #Trop court
+		self.assertFalse(verify_user_passwd('moisdaout')) #Pas de chiffres
+		self.assertFalse(verify_user_passwd('29aout1997')) #Pas de caracteres speciaux
 
-		self.assertFalse(verify_room_name('whatever')) # Doesn't start with ROOM_
-		self.assertFalse(verify_room_name('ROOM_')) # starts with ROOM_ but isn't long enough
+		self.assertTrue(verify_user_passwd('29_aout_1997')) #Mot de passe correct
 
-		# kindly stolen and adapted from : https://pynative.com/python-generate-random-string/
-		random_str_len = random.randint(3,20)
-		correct_room = 'ROOM_'
-		correct_room += ''.join(random.choice(string.ascii_lowercase) for i in range(random_str_len))
 
-		self.assertTrue(verify_room_name(correct_room))
+	def test_verify_room_type(self):
+		"""
+		Room_type : 'public' ou 'private'
+		"""
+		#Noms incorrects
+		self.assertFalse(verify_room_type('pablic'))
+		self.assertFalse(verify_room_type('poblic'))
+		self.assertFalse(verify_room_type('piblic'))
+		self.assertFalse(verify_room_type('peblic'))
+		self.assertFalse(verify_room_type('pyblic'))
+		self.assertFalse(verify_room_type('pravate'))
+		self.assertFalse(verify_room_type('provate'))
+		self.assertFalse(verify_room_type('pryvate'))
 
+		self.assertTrue(verify_room_type('public')) # 'public', nom correct
+		self.assertTrue(verify_room_type('private') # 'private', nom correct
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,17 +1,7 @@
-Let's add another requirement:
+#TD pour le developpement en mode TDD
 
-room_name should start with ROOM_ and be longer than 8 chars
+## Etape 1 : Developpement des tests
 
-To begin let's add the associated tests.
-
-Step 1 : 
-I've created the function def verify_room_name(room_name)
-
-Step 2 :
-I've added a test for the new function verify_room_name
-
-Step 3 :
-I've removed the first test and added a fancier
-
-Step 5 : 
-I've coded the function verify_room_name
+Nous avons d'abord commencer par faire les tests pour nos fonctions
+verify_user_psswd() et test_verify_room_type(). Une fois codée, elles devront
+les passer pour être validées.
