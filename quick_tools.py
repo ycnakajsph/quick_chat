@@ -1,4 +1,5 @@
 import sqlite3
+import string
 
 def get_rooms(db_path):
 	connect = sqlite3.connect(db_path)
@@ -81,6 +82,32 @@ def create_db(db_path):
 	cursor.execute('CREATE TABLE Users ([id_user] INTEGER PRIMARY KEY,[user_name] text UNIQUE, [user_role] integer, [user_rights] integer, [user_password] text)')
 
 	connect.commit()
+
+def verify_user_passwd(password):
+
+	#Longueur > 8 caracteres
+	if len(password) <= 8:
+		return False
+
+	#Contient des chiffres
+	chiffres = '0123456789'
+	if not(any(ch in chiffres for ch in password)):
+		return False
+
+	#Contient des caractères spéciaux
+	speciaux = '!"#$%&\'()*+,-./:;[]|=><?~_'
+	if not(any(sp in speciaux for sp in password)):
+		return False
+
+	return True
+
+
+def verify_room_type(room_type):
+
+	if room_type == 'public' or room_type == 'private':
+		return True
+
+	return False
 
 # Db creation :
 # db_path = 'quick_chat.db'
