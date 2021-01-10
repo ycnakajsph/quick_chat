@@ -65,14 +65,12 @@ def delete_user(db_path, user_name):
 	cursor.execute(sql,(user_name,))
 	connect.commit()
 
-def create_db(db_path):
+def createDb(db_path):
 	connect = sqlite3.connect(db_path)
-
 	cursor = connect.cursor()
-
-	cursor.execute('CREATE TABLE Rooms ([id_room] INTEGER PRIMARY KEY,[room_name] text UNIQUE, [room_type] text)')
-	cursor.execute('CREATE TABLE Users ([id_user] INTEGER PRIMARY KEY,[user_name] text UNIQUE, [user_role] integer, [user_rights] integer, [user_password] text)')
-
+	cursor.execute('CREATE TABLE Room ([id] INTEGER PRIMARY KEY,[name] TEXT UNIQUE, [password] TEXT NOT NULL, [private] BOOLEAN, [size] INTEGER)')
+	cursor.execute('CREATE TABLE User ([id] INTEGER PRIMARY KEY,[username] TEXT UNIQUE, [password] TEXT NOT NULL)')
+	cursor.execute('CREATE TABLE Message ([id] INTEGER PRIMARY KEY,[userId] INTEGER NOT NULL, [roomId] INTEGER NOT NULL, [mess] TEXT NOT NULL, [sendDate] TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY(userId) REFERENCES User(id), FOREIGN KEY(roomId) REFERENCES Room(id))')
 	connect.commit()
 
 # Db creation :
