@@ -18,7 +18,11 @@ def add_room(db_path, room_name, room_type):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
 
-	is_room_type_ok(room_type)
+	try:
+		is_room_type_ok(room_type)
+	except Exception as error:
+		print(error)
+		return
 
 	sql = 'INSERT INTO Rooms (room_name,room_type) VALUES (?,?)'
 
@@ -53,8 +57,12 @@ def add_user(db_path, user_name, user_role, user_rights, user_password):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
 
-	is_user_password_ok(user_password)
-	is_user_name_ok(user_name)
+	try:
+		is_user_password_ok(user_password)
+		is_user_name_ok(user_name)
+	except Exception as error:
+		print(error)
+		return
 
 	sql = 'INSERT INTO Users (user_name, user_role, user_rights, user_password) VALUES (?,?,?,?)'
 
@@ -86,23 +94,19 @@ def create_db(db_path):
 
 def is_room_type_ok(room_type):
 	if not (room_type == 'public' or room_type == 'private'):
-		print('room_type can only be \'public\' or \'private\'')
-		raise Exception('Wrong room_type')
+		raise Exception('**Error : Room_type can only be \'public\' or \'private\'')
 
 def is_user_password_ok(user_password):
 	if (len(user_password) < 8) or (len(re.findall('\d', user_password)) == 0) or (len(re.findall('\W', user_password)) == 0):
-		print('user password is > 8 chars, includes numbers and at least a special character')
-		raise Exception('Wrong user_password')
+		raise Exception('**Error : User password is > 8 chars, includes numbers and at least a special character')
 
 
 def is_user_name_ok(user_name):
 	if (len(re.findall('\d', user_name)) != 0) or (len(re.findall('\W', user_name)) != 0):
-		print('username cannot contain numbers or non-alphanumeric characters')
-		raise Exception('Wrong user_name')
+		raise Exception('**Error : Username cannot contain numbers or non-alphanumeric characters')
 
 	if user_name in get_users(db_path):
-		print('username has to be unique')
-		raise Exception('Wrong user_name')
+		raise Exception('**Error : Username has to be unique')
 
 
 # Db creation :
@@ -111,9 +115,11 @@ db_path = 'quick_chat.db'
 create_db(db_path)
 
 add_user(db_path,'testNom',0,0,'password1!')
-
 add_room(db_path,'room0','public')
+#add_room(db_path,'room1','test')					# Not added beacause of wrong room_type
+#add_user(db_path,'badName26',0,0,'password1!') 	# Not added beacause of wrong room_name
+#add_user(db_path,'goodName',0,0,'badPassword')		# Not added beacause of wrong room_password
 
-#print(get_users(db_path))
-#print(get_rooms(db_path))
+print(get_users(db_path))
+print(get_rooms(db_path))
 #delete_user(db_path,'yann.c')
