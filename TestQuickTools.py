@@ -44,6 +44,23 @@ class TestQuickTools(unittest.TestCase):
         self.assertTrue(('Username',) in users)
 
 
+    # Adding a user_name that does not suit the specifications
+    def test_add_user_name_ko(self):
+        # 'Username98' has a number in it
+        with self.assertRaises(Exception):
+            quick_tools.add_user(db_path, 'Username98', 0, 0, 'password1!')
+
+        # 'Username!' has a special character in it
+        with self.assertRaises(Exception):
+            quick_tools.add_user(db_path, 'Username!', 0, 0, 'password1!')
+
+        # 'my_username' is not unique
+        with self.assertRaises(Exception):
+            quick_tools.add_user(db_path, 'my_username', 0, 0, 'password1!')
+            quick_tools.add_user(db_path, 'my_username', 0, 0, 'password1!')
+            
+
+
 
 if __name__ == '__main__':
     unittest.main()
