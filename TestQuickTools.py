@@ -58,7 +58,7 @@ class TestQuickTools(unittest.TestCase):
         with self.assertRaises(Exception):
             quick_tools.add_user(db_path, 'my_username', 0, 0, 'password1!')
             quick_tools.add_user(db_path, 'my_username', 0, 0, 'password1!')
-            
+
 
 
 
