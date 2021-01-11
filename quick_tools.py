@@ -1,5 +1,14 @@
 import sqlite3
 
+def verify_room_type(room_type):
+	# Extra requirement: room_type is 'public' or 'private'
+
+def verify_user_password(user_password):
+	# Extra requirement: user_password is > 8 chars, includes numbers and at least a special character
+
+def verify_user_name(user_name):
+	# Extra requirement: user_name has to be unique and cannot have number or symbol.
+
 def get_rooms(db_path):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
