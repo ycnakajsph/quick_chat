@@ -45,6 +45,8 @@ def get_users(db_path):
 
 	return users
 
+def verify_user_name(user_name):
+	pass
 
 def add_user(db_path, user_name, user_role, user_rights, user_password):
 	connect = sqlite3.connect(db_path)
