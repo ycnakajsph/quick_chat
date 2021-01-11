@@ -1,11 +1,47 @@
-<h1>Ajout de fonctions et tests sur les room_type et user_password</h1>
-<p> Réalisé par Théo GERMAIN et Thomas BOUIX </p>
-<ul>
-  <li><h2>Etape 1 : </h2> Ajout d'une fonction 'is_room_type_ok' appelée lors de l’ajout d’une nouvelle room. Cette fonction <br /> test le room_type pour savoir s’il vaut ‘public’ ou ‘private’. <br />Si le paramètre à une autre valeur, une exception est  levée.</li>
+# Questions
 
-  <li><h2>Etape 2 : </h2> Ajout d'une fonction 'is_user_password_ok' appelée lors de l’ajout d’un nouvel utilisateur. Cette fonction <br /> vérifie que le mot de passe fasse au moins 8 caractères, et contienne au moins 1 nombre et 1 caractère non alphanumérique.<br /> Dans le cas contraire, une exception est levée.</li>
+## Qu'est ce que du TDD ?
+```
+Le _Test-Driven Development_ est une méthode de développement consitant à concevoir un logiciel par petits incréments.
+Chaque test est alors écrit avant la fonctionnalité correspondante.
+Ce paradigme de développement se base sur trois règles :
+	- Il est interdit d'écrire du code de production tant qu'on n'a pas réussi à écrire un code test qui échoue.
+	- Si on écrit un test qui échoue, on ne dois pas en écrire un autre tant que celui-ci n'est pas résolu
+	- On ne peut écrire que du code de production visant à résoudre les tests en cours, ni plus ni moins
 
-  <li><h2>Etape 3 : </h2> Ajout d'une fonction 'test_add_room_type' dans le module de test 'TestQuickTools.py'. <br />Cette fonction vérifie qu'une exception est bien levée lorsque l'on passe un room_type différent de 'public' ou 'private' lors de l'ajout d'une room.</li>
+```
 
-  <li><h2>Etape 4 : </h2> Ajout d'une fonction 'test_add_user_password' dans le module de test 'TestQuickTools.py'. <br />Cette fonction vérifie qu'une exception est bien levée lorsque l'on passe un user_password qui ne répond pas aux spécifications. Cette fonction test que les 3 cas possibles (moins de 8 caractères, pas de chiffre ou pas de caractère spéciaux) lèvent bien une exception.</li>
-</ul>
+## En quoi le TDD et l'approche devops peuvent ils améliorer la qualité d'un logiciel?
+```
+L'approche devops telle que nous l'avons défini consiste en l'automatisation des tests d'intégrations.
+Cela veut donc dire qu'à chaque fois que l'on ajoute une nouvelle fonctionnalité à la branche principale,
+on va lancer une série de tests visant à vérifier que le master est toujours sain.
+
+Ainsi, baser notre développement logicielle en utilisant le TDD et l'approche devops permet de construire
+notre projet de manière très sécurisée. Chaque erreur sera détectée très tôt et sera donc peu coûteuse à
+corriger
+```
+
+# Réalisations
+
+## Ajout de fonctions et tests sur les user_name
+
+### Etape 1 :
+```
+Ajout d'un test qui insert un nouvel utilisateur dans la base de données dont le user_name correspond bien
+aux spécifications (username unique, ne contenant ni chiffre ni caractères spéciaux), et vérifie si ce dernier
+est bel et bien ajouté dans la base.
+```
+
+### Etape 2 :
+```
+Ajout d'un second test qui insert un nouvel utilisateur ayant un username contenant un chiffre, un second ayant
+un username contenant un caractère spécial, et en insert un troisième ayant un username correct deux fois (non unique),
+le test vérifie que des exception sont bien levées lors des tentatives d'insertion.
+```
+
+### Etape 3 :
+```
+Ajout d'une fonction is_user_name_ok appelée lors de l'ajout d'un utilisateur à la base de données afin de vérifier
+que le user_name spécifié est conforme aux spécifications. Dans le cas contraire, lève une exception.
+```
