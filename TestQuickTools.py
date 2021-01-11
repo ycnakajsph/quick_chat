@@ -13,7 +13,7 @@ class TestQuickTools(unittest.TestCase):
         with self.assertRaises(Exception):
             quick_tools.add_room(db_path,'room0','custom')
 
-            
+
 
     def test_add_user_password(self):
         # 'password1' has no special character
@@ -27,6 +27,21 @@ class TestQuickTools(unittest.TestCase):
         # 'password!?' has no number in it
         with self.assertRaises(Exception):
             quick_tools.add_user(db_path,'testNom',0,0,'password!?')
+
+
+
+    # Adding a user_name that suits the specifications
+    def test_add_user_name_ok(self):
+        connect = sqlite3.connect(db_path)
+        cursor = connect.cursor()
+
+        # 'Username' should be a correct user_name
+        quick_tools.add_user(db_path, 'Username', 0, 0, 'password1!')
+
+        sql = 'SELECT user_name FROM Users;'
+
+        users = cursor.execute(sql).fetchall()
+        self.assertTrue(('Username',) in users)
 
 
 

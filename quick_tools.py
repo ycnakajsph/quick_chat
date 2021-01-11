@@ -98,10 +98,9 @@ db_path = 'quick_chat.db'
 
 create_db(db_path)
 
-#add_user('quick_chat.db','yann.c',0,0,'password')
 add_user(db_path,'testNom',0,0,'password1!')
 
-#add_room(db_path,'room0','public')
+add_room(db_path,'room0','public')
 
 #print(get_users(db_path))
 #print(get_rooms(db_path))
