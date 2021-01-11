@@ -1,6 +1,7 @@
 import unittest
 from quick_tools import verify_user_passwd
 from quick_tools import verify_room_type
+from quick_tools import verify_username
 import sqlite3
 import quick_tools as tool
 
@@ -8,14 +9,14 @@ class QuickToolsTester(unittest.TestCase):
 
 	def setUp(self):
         #Creation de BDD
-        self.db_path = 'test_chat.db'
-        self.connect = sqlite3.connect(self.db_path)
-        self.cursor = self.connect.cursor()
-        tool.create_db(self.db_path)
+		self.db_path = 'test_chat.db'
+		self.connect = sqlite3.connect(self.db_path)
+		self.cursor = self.connect.cursor()
+		tool.create_db(self.db_path)
 
-    def tearDown(self):
-        #Suppression de BDD
-        tool.delete_db(self.db_path)
+	def tearDown(self):
+		#Suppression de BDD
+		tool.delete_db(self.db_path)
 
 	def test_verify_user_passwd(self):
 		#User_password : > 8 chars, inclut nombres et au moins un caractère special
@@ -57,19 +58,19 @@ class QuickToolsTester(unittest.TestCase):
 		tool.add_user(self.db_path,'hickory',0,0,'26_juin_1946')
 
 		#Unicité du username
-		self.assertFalse(verify_username(self.dbpath, 'hunk'))
-		self.assertFalse(verify_username(self.dbpath, 'zeke'))
-		self.assertFalse(verify_username(self.dbpath, 'hickory'))
+		self.assertFalse(verify_username(self.db_path, 'hunk'))
+		self.assertFalse(verify_username(self.db_path, 'zeke'))
+		self.assertFalse(verify_username(self.db_path, 'hickory'))
 
 		#Verification des chiffres et symboles
-		self.assertFalse(verify_username(self.dbpath, 'z3k3'))
-		self.assertFalse(verify_username(self.dbpath, '/HuNk/'))
-		self.assertFalse(verify_username(self.dbpath, '_h|ck0ry_'))
+		self.assertFalse(verify_username(self.db_path, 'z3k3'))
+		self.assertFalse(verify_username(self.db_path, '/HuNk/'))
+		self.assertFalse(verify_username(self.db_path, '_h|ck0ry_'))
 
 		#Usernames corrects
-		self.assertTrue(verify_username(self.dbpath, 'dorothy'))
-		self.assertTrue(verify_username(self.dbpath, 'witch'))
-		self.assertTrue(verify_username(self.dbpath, 'oz'))
+		self.assertTrue(verify_username(self.db_path, 'dorothy'))
+		self.assertTrue(verify_username(self.db_path, 'witch'))
+		self.assertTrue(verify_username(self.db_path, 'oz'))
 
 
 if __name__ == '__main__':

@@ -34,3 +34,8 @@ qui ne dispose d'aucun symbole ou chiffre. Pour verifier que le nom est unique,
 il faut le verifier directement dans la base de données, on ajoute donc les
 méthodes setUp() et tearDown() pour créer une BDD de test. On utilise la
 fonction add_user pour ajouter quelques utilisateurs pour le test.
+
+## Etape 4 : Developpement de la fonction verify_username
+
+Nous avons codé la fonction verify_username et une fois les tests validés, nous
+avons arrêté de la modifier.
