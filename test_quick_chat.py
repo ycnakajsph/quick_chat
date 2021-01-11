@@ -57,19 +57,19 @@ class QuickToolsTester(unittest.TestCase):
 		tool.add_user(self.db_path,'hickory',0,0,'26_juin_1946')
 
 		#Unicité du username
-		self.assertFalse(verify_username('hunk'))
-		self.assertFalse(verify_username('zeke'))
-		self.assertFalse(verify_username('hickory'))
+		self.assertFalse(verify_username(self.dbpath, 'hunk'))
+		self.assertFalse(verify_username(self.dbpath, 'zeke'))
+		self.assertFalse(verify_username(self.dbpath, 'hickory'))
 
 		#Verification des chiffres et symboles
-		self.assertFalse(verify_username('z3k3'))
-		self.assertFalse(verify_username('/HuNk/'))
-		self.assertFalse(verify_username('_h|ck0ry_'))
+		self.assertFalse(verify_username(self.dbpath, 'z3k3'))
+		self.assertFalse(verify_username(self.dbpath, '/HuNk/'))
+		self.assertFalse(verify_username(self.dbpath, '_h|ck0ry_'))
 
 		#Usernames corrects
-		self.assertTrue(verify_username('dorothy'))
-		self.assertTrue(verify_username('witch'))
-		self.assertTrue(verify_username('oz'))
+		self.assertTrue(verify_username(self.dbpath, 'dorothy'))
+		self.assertTrue(verify_username(self.dbpath, 'witch'))
+		self.assertTrue(verify_username(self.dbpath, 'oz'))
 
 
 if __name__ == '__main__':
