@@ -45,3 +45,11 @@ le test vérifie que des exception sont bien levées lors des tentatives d'inser
 Ajout d'une fonction is_user_name_ok appelée lors de l'ajout d'un utilisateur à la base de données afin de vérifier
 que le user_name spécifié est conforme aux spécifications. Dans le cas contraire, lève une exception.
 ```
+
+### Etape 4 :
+```
+Gestion des exceptions levées lors des fonctions de vérifications de la conformité des user_name, user_password et
+room_type grâce à l'ajout de blocs try/except dans les fonctions add_user et add_room. En cas de mauvaise données,
+l'application ne crash plus et affiche simplement un message d'erreur, puis termine son execution sans ajouter les
+données indésirables à la base de données.
+```
