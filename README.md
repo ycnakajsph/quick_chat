@@ -26,3 +26,11 @@ les passer pour être validées.
 
 Nous avons ensuite écrit les fonctions et une fois que les tests ne renvoyaient
 pas d'erreurs, nous avons pu arrêter le développement.
+
+## Etape 3 : Test de verify_username
+
+Les conditions à respecter pour le username sont ici d'avoir un nom unique et
+qui ne dispose d'aucun symbole ou chiffre. Pour verifier que le nom est unique,
+il faut le verifier directement dans la base de données, on ajoute donc les
+méthodes setUp() et tearDown() pour créer une BDD de test. On utilise la
+fonction add_user pour ajouter quelques utilisateurs pour le test.
