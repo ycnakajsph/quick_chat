@@ -93,6 +93,19 @@ def delete_user(db_path, user_name):
 
 	cursor.execute(sql,(user_name,))
 	connect.commit()
+def verify_username(db_path,user_name):
+
+	users = get_users(db_path)
+
+	badName = '$%*+,-./:!"#&\'();[]|=><?~_0123456789'
+	if any(spc in badName for spc in user_name):
+		return False
+	
+	for name in users:
+		if user_name == name:
+			return False
+
+	return True
 
 def create_db(db_path):
 	connect = sqlite3.connect(db_path)
