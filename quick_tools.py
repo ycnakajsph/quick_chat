@@ -10,14 +10,17 @@ def verify_user_password(user_password):
 	# Extra requirement: user_password is > 8 chars, includes numbers and at least a special character
 	has_number = False
 	has_special_character = False
+	has_letter = False
 
 	for c in user_password:
 		if c.isdigit():
 			has_number = True
 		if (not c.islower()) and (not c.isupper())  and (not c.isdigit()):
 			has_special_character = True
+		if c.islower() or c.isupper():
+			has_letter = True
 
-	if len(user_password) > 8 and has_number and has_special_character:
+	if len(user_password) > 8 and has_number and has_special_character and has_letter:
 		return True
 	return False
 
@@ -37,7 +40,8 @@ def verify_user_name(user_name):
 	if (not has_number) and (not has_special_character):
 		sql = 'SELECT user_name FROM Users;'
 		user_names = cursor.execute(sql).fetchall()
-		if user_name not in user_names:
+		
+		if user_name not in [name[0] for name in user_names]:
 			return True
 
 	return False
@@ -59,24 +63,23 @@ def add_room(db_path, room_name, room_type):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
 
-	sql = 'INSERT INTO Rooms (room_name,room_type) VALUES (?,?)'
-
-	cursor.execute(sql,(room_name, room_type))
-	connect.commit()
-
-
-def delete_room(db_path, room_name):
-	connect = sqlite3.connect(db_path)
-	cursor = connect.cursor()
-
 	if verify_room_type(room_type):
-		sql = 'DELETE FROM Rooms WHERE room_name=?'
+		sql = 'INSERT INTO Rooms (room_name,room_type) VALUES (?,?)'
 
 		cursor.execute(sql,(room_name, room_type))
 		connect.commit()
 	else:
 		print('ERROR in Rooms: room_type must be \'public\' or \'private\'')
 
+def delete_room(db_path, room_name):
+	connect = sqlite3.connect(db_path)
+	cursor = connect.cursor()
+	
+	sql = 'DELETE FROM Rooms WHERE room_name=?'
+
+	cursor.execute(sql,(room_name,))
+	connect.commit()
+	
 
 def get_users(db_path):
 	connect = sqlite3.connect(db_path)
@@ -124,13 +127,13 @@ def create_db(db_path):
 	connect.commit()
 
 # Db creation :
-db_path = 'quick_chat.db'
+db_path = 'quick_chat_test.db'
 
-create_db(db_path)
+# create_db(db_path)
 
-add_user('quick_chat.db','yann.c',0,0,'password')
-add_room('quick_chat.db','room0','public')
+# add_user('quick_chat.db','yann.c',0,0,'password')
+# add_room('quick_chat.db','room0','public')
 
-print(get_users(db_path))
-print(get_rooms(db_path))
-delete_user(db_path,'yann.c')
+# print(get_users(db_path))
+# print(get_rooms(db_path))
+# delete_user(db_path,'yann.c')
