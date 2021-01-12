@@ -19,6 +19,23 @@ class TestToolsMethods(unittest.TestCase):
 		self.assertTrue(verifyRoomType('public'))
 		self.assertTrue(verifyRoomType('private'))
 	
+	# Test verification password
+	def testPasswordLenght(self):
+		# Test bon password
+		self.assertTrue(verifyPassword('password1!'))
+		# Test password trop petit
+		self.assertFalse(verifyPassword('123*'))
+		# Test password égal à 8
+		self.assertFalse(verifyPassword('1234567/'))
+
+	def testPasswordSyntax(self):
+		# Test password sans chiffre	
+		self.assertFalse(verifyPassword('password!'))
+		# Test password sans symbole	
+		self.assertFalse(verifyPassword('password1'))
+		# Test password sans aucun des 2	
+		self.assertFalse(verifyPassword('passwordbon'))
+				
 	def tearDown(self):
 		# Db remove :
 		os.remove("quick_chat.db")
