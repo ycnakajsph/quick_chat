@@ -45,7 +45,8 @@ class TestQuickTools(unittest.TestCase):
         cursor = connect.cursor()
 
         # 'Ludollaoo' est correct
-        quick_tools.add_user(db_path, 'Ludollaoo', 0, 0, 'password1!')
+        with self.assertRaises(Exception):
+        	quick_tools.add_user(db_path, 'Ludollaoo', 0, 0, 'password1!')
 
         sql = 'SELECT user_name FROM Users;'
 
@@ -55,7 +56,8 @@ class TestQuickTools(unittest.TestCase):
 	#test ajout d'username incorrect
 	def test_add_user_name_ko_number(self):
 		# 'Username98' a des nombres
-        quick_tools.add_user(db_path, 'Username98', 0, 0, 'password1!')
+		with self.assertRaises(Exception):
+        	quick_tools.add_user(db_path, 'Username98', 0, 0, 'password1!')
         
         sql = 'SELECT user_name FROM Users;'
 
@@ -64,7 +66,8 @@ class TestQuickTools(unittest.TestCase):
         
     def test_add_user_name_ko_special_caractere(self):
         # 'Username!' a un caractere special
-        quick_tools.add_user(db_path, 'Username!', 0, 0, 'password1!')
+        with self.assertRaises(Exception):
+        	quick_tools.add_user(db_path, 'Username!', 0, 0, 'password1!')
         
         sql = 'SELECT user_name FROM Users;'
 
@@ -73,8 +76,9 @@ class TestQuickTools(unittest.TestCase):
 	
 	def test_add_user_name_ko_non_unique(self):
         # 'my_username' n'est pas unique
-        quick_tools.add_user(db_path, 'my_username', 0, 0, 'password1!')
-        quick_tools.add_user(db_path, 'my_username', 0, 0, 'password1!')
+        with self.assertRaises(Exception):
+        	quick_tools.add_user(db_path, 'my_username', 0, 0, 'password1!')
+        	quick_tools.add_user(db_path, 'my_username', 0, 0, 'password1!')
 
 if __name__ == '__main__':
     unittest.main()

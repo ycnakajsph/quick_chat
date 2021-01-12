@@ -34,4 +34,8 @@ La fonction add_user ne passe pas les tests
 
 Ajout d'une fonction is_user_name_ok pour que le username respecte la spécification
 
+### Step 4 : Gestions des exceptions
+
+try/except dans la fonction add_user
+
 

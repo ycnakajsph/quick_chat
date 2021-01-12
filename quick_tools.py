@@ -49,6 +49,13 @@ def get_users(db_path):
 def add_user(db_path, user_name, user_role, user_rights, user_password):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
+	
+	try:
+		is_user_password_ok(user_password)
+		is_user_name_ok(user_name)
+	except Exception as error:
+		print(error)
+	return
 
 	sql = 'INSERT INTO Users (user_name, user_role, user_rights, user_password) VALUES (?,?,?,?)'
 
