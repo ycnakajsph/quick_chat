@@ -48,7 +48,7 @@ def get_users(db_path):
 def verify_user_name(user_name, db_path):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
-	sql = 'SELECT user_name FROM USERS;'
+	sql = 'SELECT user_name FROM Users;'
 	users = cursor.execute(sql).fetchall()
 
 	for user in users:
@@ -62,7 +62,7 @@ def verify_user_name(user_name, db_path):
 			return False
 		elif (ord(lettre) >= 123 and orf(lettre) <= 126):
 			return False
-	return True 
+	return True
 
 def add_user(db_path, user_name, user_role, user_rights, user_password):
 	connect = sqlite3.connect(db_path)
@@ -95,9 +95,9 @@ def create_db(db_path):
 
 # Db creation :
 # db_path = 'quick_chat.db'
-
+#
 # create_db(db_path)
-
+#
 # add_user('quick_chat.db','yann.c',0,0,'password')
 # add_room('quick_chat.db','room0','public')
 
