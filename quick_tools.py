@@ -45,8 +45,24 @@ def get_users(db_path):
 
 	return users
 
-def verify_user_name(user_name):
-	pass
+def verify_user_name(user_name, db_path):
+	connect = sqlite3.connect(db_path)
+	cursor = connect.cursor()
+	sql = 'SELECT user_name FROM USERS;'
+	users = cursor.execute(sql).fetchall()
+
+	for user in users:
+		if user == user_name:
+			return False
+
+	for lettre in user_name:
+		if (ord(lettre) >= 33 and ord(lettre) <= 64):
+			return False
+		elif (ord(lettre) >= 91 and ord(lettre) <= 96):
+			return False
+		elif (ord(lettre) >= 123 and orf(lettre) <= 126):
+			return False
+	return True 
 
 def add_user(db_path, user_name, user_role, user_rights, user_password):
 	connect = sqlite3.connect(db_path)
