@@ -22,6 +22,8 @@ def add_room(db_path, room_name, room_type):
 	cursor.execute(sql,(room_name, room_type))
 	connect.commit()
 
+def verify_username(username):
+	pass
 
 def delete_room(db_path, room_name):
 	connect = sqlite3.connect(db_path)
