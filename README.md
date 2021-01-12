@@ -30,3 +30,8 @@ Insertion d'username incorrect:
 	- nom déjà utilisé
 La fonction add_user ne passe pas les tests
 
+### Step 3 : modification de la fonction
+
+Ajout d'une fonction is_user_name_ok pour que le username respecte la spécification
+
+

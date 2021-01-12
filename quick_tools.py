@@ -74,6 +74,13 @@ def create_db(db_path):
 	cursor.execute('CREATE TABLE Users ([id_user] INTEGER PRIMARY KEY,[user_name] text UNIQUE, [user_role] integer, [user_rights] integer, [user_password] text)')
 
 	connect.commit()
+	
+def is_user_name_ok(user_name):
+	if (len(re.findall('\d', user_name)) != 0) or (len(re.findall('\W', user_name)) != 0):
+		raise Exception('**Error : Username cannot contain numbers or non-alphanumeric characters')
+
+	if user_name in get_users(db_path):
+		raise Exception('**Error : Username has to be unique')
 
 # Db creation :
 # db_path = 'quick_chat.db'
