@@ -51,6 +51,21 @@ def get_users(db_path):
 
 	return users
 
+def verifyUsername(user_name, db_path):
+	users = get_users(db_path)
+	print(users)
+	for names in users:
+		print(names)
+		if user_name == names:
+			print("Error! 2 fois le même nom")
+			return False
+	
+	if not re.match("^[a-z]*$", user_name): 
+		print("Error! Only letters a-z allowed!")
+		return False
+    
+	return True    
+
 def verifyPassword(password):
 	
 	if len(password) <= 8:
