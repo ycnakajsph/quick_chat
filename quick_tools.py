@@ -1,4 +1,5 @@
 import sqlite3
+import re
 
 def get_rooms(db_path):
 	connect = sqlite3.connect(db_path)
@@ -12,6 +13,11 @@ def get_rooms(db_path):
 
 	return rooms
 
+def verifyRoomType(room_type):
+	if (room_type != 'public') and (room_type != 'private'):
+		print("La room ne peut être que 'public' ou 'private'")
+		return False
+	return True
 
 def add_room(db_path, room_name, room_type):
 	connect = sqlite3.connect(db_path)
@@ -45,13 +51,43 @@ def get_users(db_path):
 
 	return users
 
+def verifyUsername(user_name, db_path):
+	users = get_users(db_path)
+	print(users)
+	for names in users:
+		print(names)
+		if user_name == names:
+			print("Error! 2 fois le même nom")
+			return False
+	
+	if not re.match("^[a-z]*$", user_name): 
+		print("Error! Only letters a-z allowed!")
+		return False
+    
+	return True    
+
+def verifyPassword(password):
+	
+	if len(password) <= 8:
+		print("Error ! Mdp trop court")
+		return False
+
+	chiffres = '0123456789'	
+	if not any(c in chiffres for c in password):
+		print("Error ! Pas de chiffre") 
+		return False
+
+	caracteresSpeciaux = '[\'*!?#$%&*+-.^_|~:$]'
+	if not any(c in caracteresSpeciaux for c in password):
+		print("Error ! pas de caractére spécial")	
+		return False
+	return True
 
 def add_user(db_path, user_name, user_role, user_rights, user_password):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
-
+    
 	sql = 'INSERT INTO Users (user_name, user_role, user_rights, user_password) VALUES (?,?,?,?)'
-
 	cursor.execute(sql,(user_name, user_role, user_rights, user_password))
 	connect.commit()
 
