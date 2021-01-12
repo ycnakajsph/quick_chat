@@ -17,7 +17,16 @@ En construisant et vérifiant les nouvelles fonctionnalitées de manière unitai
 
 ## Test username
 
-### Step 1
+### Step 1 : test username correct
 
 Insertion d'un username correct
 Vérification de l'ajout
+
+### Step 2 : test username incorrect
+
+Insertion d'username incorrect:
+	- chiffre dans le nom
+	- caractère spécial dansle nom
+	- nom déjà utilisé
+La fonction add_user ne passe pas les tests
+
