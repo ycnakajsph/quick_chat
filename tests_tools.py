@@ -36,6 +36,20 @@ class TestToolsMethods(unittest.TestCase):
 		# Test password sans aucun des 2	
 		self.assertFalse(verifyPassword('passwordbon'))
 				
+
+	# Test de la présence d'un symbol dans le prénom
+	def testSymbolUsername(self):
+		self.assertFalse(verifyUsername('Afif$$.j', self.db_path))
+
+	# Test de la présence d'un chiffre dans le prénom
+	def testNumberUsername(self):
+		self.assertFalse(verifyUsername('Afif75', self.db_path))
+
+	# Test de la présence d'un prénom déja dans la base de donnée
+	def testUsernameTwice(self):
+		add_user(self.db_path, 'Afif', 0, 0, 'password')
+		self.assertFalse(verifyUsername('Afif', self.db_path))
+
 	def tearDown(self):
 		# Db remove :
 		os.remove("quick_chat.db")
