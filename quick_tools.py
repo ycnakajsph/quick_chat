@@ -1,4 +1,5 @@
 import sqlite3
+import re
 
 def get_rooms(db_path):
 	connect = sqlite3.connect(db_path)
@@ -12,6 +13,11 @@ def get_rooms(db_path):
 
 	return rooms
 
+def verifyRoomType(room_type):
+	if (room_type != 'public') and (room_type != 'private'):
+		print("La room ne peut être que 'public' ou 'private'")
+		return False
+	return True
 
 def add_room(db_path, room_name, room_type):
 	connect = sqlite3.connect(db_path)
@@ -45,13 +51,11 @@ def get_users(db_path):
 
 	return users
 
-
 def add_user(db_path, user_name, user_role, user_rights, user_password):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
-
+    
 	sql = 'INSERT INTO Users (user_name, user_role, user_rights, user_password) VALUES (?,?,?,?)'
-
 	cursor.execute(sql,(user_name, user_role, user_rights, user_password))
 	connect.commit()
 
