@@ -51,6 +51,23 @@ def get_users(db_path):
 
 	return users
 
+def verifyPassword(password):
+	
+	if len(password) <= 8:
+		print("Error ! Mdp trop court")
+		return False
+
+	chiffres = '0123456789'	
+	if not any(c in chiffres for c in password):
+		print("Error ! Pas de chiffre") 
+		return False
+
+	caracteresSpeciaux = '[\'*!?#$%&*+-.^_|~:$]'
+	if not any(c in caracteresSpeciaux for c in password):
+		print("Error ! pas de caractére spécial")	
+		return False
+	return True
+
 def add_user(db_path, user_name, user_role, user_rights, user_password):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
