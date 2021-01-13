@@ -49,13 +49,6 @@ def get_users(db_path):
 def add_user(db_path, user_name, user_role, user_rights, user_password):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
-	
-	try:
-		is_user_password_ok(user_password)
-		is_user_name_ok(user_name)
-	except Exception as error:
-		print(error)
-	return
 
 	sql = 'INSERT INTO Users (user_name, user_role, user_rights, user_password) VALUES (?,?,?,?)'
 
@@ -77,26 +70,22 @@ def create_db(db_path):
 
 	cursor = connect.cursor()
 
+	cursor.execute('DROP TABLE IF EXISTS Rooms')
+	cursor.execute('DROP TABLE IF EXISTS Users')
+
 	cursor.execute('CREATE TABLE Rooms ([id_room] INTEGER PRIMARY KEY,[room_name] text UNIQUE, [room_type] text)')
 	cursor.execute('CREATE TABLE Users ([id_user] INTEGER PRIMARY KEY,[user_name] text UNIQUE, [user_role] integer, [user_rights] integer, [user_password] text)')
 
 	connect.commit()
-	
-def is_user_name_ok(user_name):
-	if (len(re.findall('\d', user_name)) != 0) or (len(re.findall('\W', user_name)) != 0):
-		raise Exception('**Error : Username cannot contain numbers or non-alphanumeric characters')
-
-	if user_name in get_users(db_path):
-		raise Exception('**Error : Username has to be unique')
 
 # Db creation :
-# db_path = 'quick_chat.db'
+db_path = 'quick_chat.db'
 
-# create_db(db_path)
+create_db(db_path)
 
-# add_user('quick_chat.db','yann.c',0,0,'password')
-# add_room('quick_chat.db','room0','public')
+#add_user('quick_chat.db','yann.c',0,0,'password')
+add_room('quick_chat.db','room0','public')
 
-# print(get_users(db_path))
-# print(get_rooms(db_path))
-# delete_user(db_path,'yann.c')
+print(get_users(db_path))
+print(get_rooms(db_path))
+#delete_user(db_path,'yann.c')
