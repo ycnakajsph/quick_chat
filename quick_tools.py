@@ -19,6 +19,23 @@ def verify_room_name(room_name):
 			return True
 	return False
 
+def verify_username(db_path, username):
+	#le nom d'utilisateur doit être unique et ne doit contenir aucun chiffre ni aucun symbole
+	special_characters = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+
+	connect = sqlite3.connect(db_path)
+	cursor = connect.cursor()
+	sql = 'SELECT * FROM Users WHERE user_name="%s"' %(username)
+	rep = cursor.execute(sql).fetchall()
+	if len(rep)==0:
+		#Si il y en a pas encore
+		if not any(char.isdigit() for char in username):
+			#Si il ne contient aucun chiffre
+			if not any(char in special_characters for char in username):
+				#Si il ne contient aucun symbole
+				return True
+
+	return False
 
 def add_room(db_path, room_name, room_type):
 	connect = sqlite3.connect(db_path)

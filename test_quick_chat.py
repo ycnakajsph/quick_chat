@@ -1,5 +1,5 @@
 import unittest
-from quick_tools import verify_room_name
+from quick_tools import *
 import random
 import string
 
@@ -17,3 +17,24 @@ class QuickToolsTester(unittest.TestCase):
 
 		self.assertTrue(verify_room_name(correct_room))
 
+	def test_verify_username(self):
+
+		db_path = 'quick_chat.db'
+
+
+		self.assertFalse(verify_username(db_path, 'USER94?')) 	#Special character and number
+		self.assertFalse(verify_username(db_path, 'USERword?'))	#Special character
+		self.assertFalse(verify_username(db_path, 'USERword94'))	#Number
+
+		# We add a username, and test the uniqueness
+
+		delete_user(db_path,'MervisMudry') #On supprime l'élement à chaque lancement de la fonction, pour que l'ajout ensuie se passe sans problème
+		add_user('quick_chat.db','MervisMudry',0,0,'password')
+
+
+		# users = get_users(db_path)
+		# print(users)
+
+		self.assertFalse(verify_username(db_path, 'MervisMudry'))
+
+		self.assertTrue(verify_username(db_path, 'USERname'))
