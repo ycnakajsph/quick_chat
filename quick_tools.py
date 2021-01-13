@@ -28,13 +28,18 @@ def verify_user_password(password):
 		if any(char.isdigit() for char in password):
 			#is passwd have at least one special char
 			if any(char in special_characters for char in password):
-				return True 
+				return True
 	return False
 
 def verify_room_type(room_type):
 	#just verify the room_type
 	if room_type == "public" or room_type == "private":
-		return True 
+		return True
+	return False
+
+def verify_username(username):
+	#just verify the username
+	
 	return False
 
 def add_room(db_path, room_name, room_type):
