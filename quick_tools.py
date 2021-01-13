@@ -19,6 +19,10 @@ def verify_room_name(room_name):
 			return True
 	return False
 
+def verify_username(db_path, username):
+	#le nom d'utilisateur doit être unique et ne doit contenir aucun chiffre ni aucun symbole
+
+	return False
 
 def add_room(db_path, room_name, room_type):
 	connect = sqlite3.connect(db_path)
