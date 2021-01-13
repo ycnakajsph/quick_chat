@@ -50,17 +50,19 @@ def verify_user_name(user_name, db_path):
 	cursor = connect.cursor()
 	sql = 'SELECT user_name FROM Users;'
 	users = cursor.execute(sql).fetchall()
+	users = [user[0] for user in users]
+
 
 	for user in users:
 		if user == user_name:
 			return False
 
 	for lettre in user_name:
-		if (ord(lettre) >= 33 and ord(lettre) <= 64):
+		if (ord(lettre) >= 32 and ord(lettre) <= 64):
 			return False
 		elif (ord(lettre) >= 91 and ord(lettre) <= 96):
 			return False
-		elif (ord(lettre) >= 123 and orf(lettre) <= 126):
+		elif (ord(lettre) >= 123 and ord(lettre) <= 126):
 			return False
 	return True
 
