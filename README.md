@@ -25,3 +25,18 @@ Step 7 :
 We've created 2 other tests for those 2 functions. We test various types of room_type and password to ensure that every bug should be detected. We separated each aspect of the test (one aspect = one assertFalse or True). The last attempt is always a valid one.
 
 Each test tests only one function (really important)
+
+
+
+Let's add another requirement:
+
+username should be unique and should not contain any number or special character
+
+To begin let's add the associated tests.
+
+Step 1 : I've created the function def verify_username(username)
+
+Step 2 : I've added a test for the new function verify_username (test_
+
+Step 3 : I've coded the function verify_username
+
