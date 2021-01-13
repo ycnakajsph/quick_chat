@@ -13,6 +13,13 @@ def get_rooms(db_path):
 	return rooms
 
 
+def verify_room_name(room_name):
+	if room_name.startswith('ROOM_'):
+		if len(room_name) >= 8 :
+			return True
+	return False
+
+
 def add_room(db_path, room_name, room_type):
 	connect = sqlite3.connect(db_path)
 	cursor = connect.cursor()
