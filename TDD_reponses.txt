@@ -1,0 +1,15 @@
+1- Qu'est-ce que du TDD?
+
+La TDD, alias "Test Driven Development", est le principe de créer les fonctions pour tester le code,
+avant de créer celui-ci. Ainsi, les développeurs sont mieux guidés lors du développement, pour convenir
+aux exigances qui ont été implémentées dans les fonctions de test. Aussi, ils peuvent déboguer leur
+code plus vite, aliant donc vitesse et efficacité.
+
+
+2- En quoi le TDD et l'approche devops peuvent-ils améliorer la qualité d'un logiciel?
+
+La méthode devops repose sur une bonne communication entre les teams de développeurs et de l'exploitation
+système. Ainsi, en l'alliant au TDD qui permet des tests constants, et donc d'obtenir un code quasi parfait
+et ce en continue, il est alors possible d'intégrer la solution et de la surveiller en continue. De plus,
+les deux équipes ont une meilleur communication, faisant ainsi remonter les problèmes plus vite. Ainsi,
+au delà du code, le logiciel se retrouve amélioré dans son ensemble.
