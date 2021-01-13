@@ -1,4 +1,5 @@
 import sqlite3
+import re
 
 def get_rooms(db_path):
 	connect = sqlite3.connect(db_path)
@@ -52,8 +53,9 @@ def add_user(db_path, user_name, user_role, user_rights, user_password):
 
 	sql = 'INSERT INTO Users (user_name, user_role, user_rights, user_password) VALUES (?,?,?,?)'
 
-	cursor.execute(sql,(user_name, user_role, user_rights, user_password))
-	connect.commit()
+	if (len(re.findall('\d', user_name)) == 0) and (len(re.findall('\W', user_name)) == 0):
+		cursor.execute(sql,(user_name, user_role, user_rights, user_password))
+		connect.commit()
 
 
 def delete_user(db_path, user_name):
